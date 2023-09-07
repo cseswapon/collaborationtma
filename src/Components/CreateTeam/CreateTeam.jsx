@@ -10,6 +10,7 @@ const CreateTeam = () => {
         return
       }
     localStorage.setItem("team", JSON.stringify([...allTeam, team]));
+    alert('Team Create Successfully')
     setAllTeal([...allTeam, team]);
     // console.log(team);
     setTeam("");
@@ -25,11 +26,14 @@ useEffect(() => {
   return (
     <>
       <Header />
-      <h1>Create Team</h1>
+      <div className="container">
+        <h1>Create Team</h1>
       <form onSubmit={handelSubmit}>
         <div>
-          <label>Team Name</label>
-          <input
+          <label>Team Name</label><br />
+            <input
+              required
+              className="my-2 w-100 p-2"
             value={team}
             type="text"
             placeholder="Team Name"
@@ -37,9 +41,11 @@ useEffect(() => {
           />
         </div>
         <div>
-          <button type="submit">Create Team</button>
+          <button className="p-1 my-3 btn btn-primary w-100" type="submit">Create Team</button>
         </div>
       </form>
+      </div>
+      
     </>
   );
 };

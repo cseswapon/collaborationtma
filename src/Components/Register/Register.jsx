@@ -55,60 +55,79 @@ export default function Register() {
   };
 
   return (
-    <div>
-      <h2>Registration</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setState({ ...state, email: e.target.value })}
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setState({ ...state, password: e.target.value })}
-          />
-        </div>
-        <div>
-          <label>Username:</label>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setState({ ...state, username: e.target.value })}
-          />
-        </div>
-        <div>
-          <label>Bio:</label>
-          <textarea
-            placeholder="Bio"
-            value={bio}
-            onChange={(e) => setState({ ...state, bio: e.target.value })}
-          />
-        </div>
-        <div>
-          <label>Profile Picture:</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) =>
-              setState({ ...state, profilePicture: e.target.files[0] })
-            }
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-      <p>
-        Already Registered? <Link to="/login">Login</Link>
-      </p>
-      {error && <p>{error}</p>}
+    <div className="bg-login">
+      <div>
+        <h2 className="fw-bold text-light">Registration</h2>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label className="text-light my-1">Email:</label>
+            <br />
+            <input
+              required
+              className="w-100 p-2"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setState({ ...state, email: e.target.value })}
+            />
+          </div>
+          <div>
+            <label className="text-light my-1">Password:</label>
+            <br />
+            <input
+              required
+              className="w-100 p-2"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setState({ ...state, password: e.target.value })}
+            />
+          </div>
+          <div>
+            <label className="text-light my-1">Username:</label>
+            <br />
+            <input
+              required
+              className="w-100 p-2"
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setState({ ...state, username: e.target.value })}
+            />
+          </div>
+          <div>
+            <label className="text-light my-1">Bio:</label>
+            <br />
+            <textarea
+              required
+              className="w-100 p-2"
+              placeholder="Bio"
+              value={bio}
+              onChange={(e) => setState({ ...state, bio: e.target.value })}
+            />
+          </div>
+          <div>
+            <label className="text-light my-1">Profile Picture:</label>
+            <br />
+            <input
+              required
+              className="w-100 p-2"
+              type="file"
+              accept="image/*"
+              onChange={(e) =>
+                setState({ ...state, profilePicture: e.target.files[0] })
+              }
+            />
+          </div>
+          <button className="btn btn-primary mt-3 w-100" type="submit">
+            Register
+          </button>
+        </form>
+        <p className="text-center text-light my-2">
+         User Already Registered <Link to="/login">Login</Link> !!!
+        </p>
+        {error && <p>{error}</p>}
+      </div>
     </div>
   );
 }

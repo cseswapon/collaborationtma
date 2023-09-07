@@ -44,14 +44,32 @@ const Header = () => {
   }, []);
 
   return (
-    <>
-      <Link to="/">Home</Link>
-      <Link to="/createTeam">Create Team</Link>
-      <Link to="/taskTeam">Create Team Taxk</Link>
-      <img src={data.profilePicture} width={40} alt="avatar" />
-      <strong>{data?.email}</strong>
-      <button onClick={logout}>LogOut</button>
-    </>
+    <div className="d-flex align-items-center container justify-content-between py-3">
+      <div>
+        <Link className="text-decoration-none me-3" to="/">
+          Home
+        </Link>
+        <Link className="text-decoration-none me-3" to="/createTeam">
+          Create Team
+        </Link>
+        <Link className="text-decoration-none me-3" to="/taskTeam">
+          Create Team Taxk
+        </Link>
+      </div>
+      <div className="d-flex align-items-center">
+        <img
+          className="mx-2 img-thumbnail"
+          src={data.profilePicture}
+          width={70}
+          height={70}
+          alt="avatar"
+        />
+        <strong className="mx-2">{data?.email}</strong>
+        <button className="mx-2 btn btn-danger" onClick={logout}>
+          LogOut
+        </button>
+      </div>
+    </div>
   );
 };
 

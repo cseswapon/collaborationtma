@@ -1,0 +1,12 @@
+.bg-login{
+    background: rgb(0, 0, 0);
+    height: 100vh;
+    position: relative;
+}
+
+.bg-login>div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%)
+}

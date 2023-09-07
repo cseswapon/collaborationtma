@@ -36,6 +36,8 @@ const TaskCreate = () => {
     // Save the updated array to sessionStorage
     localStorage.setItem("task", JSON?.stringify([...storData, taskData]));
 
+    alert('Task Added')
+
     setNewTask({
       title: "",
       description: "",
@@ -95,11 +97,13 @@ const handleStatusChange = (index, newStatus) => {
 };
     
     return (
-      <>
+      <div className="container">
         <h2>Task Manager</h2>
         <div>
-          <label>Title:</label>
+          <label>Title:</label><br />
           <input
+          className="w-100 p-2 my-1"
+            required
             placeholder="title"
             type="text"
             value={newTask.title}
@@ -107,8 +111,10 @@ const handleStatusChange = (index, newStatus) => {
           />
         </div>
         <div>
-          <label>Description:</label>
+          <label>Description:</label><br />
           <textarea
+          className="w-100 p-2 my-1"
+            required
             placeholder="description"
             value={newTask.description}
             onChange={(e) =>
@@ -117,8 +123,10 @@ const handleStatusChange = (index, newStatus) => {
           />
         </div>
         <div>
-          <label>Due Date:</label>
+          <label>Due Date:</label><br />
           <input
+          className="w-100 p-2 my-1"
+            required
             type="date"
             value={newTask.dueDate}
             onChange={(e) =>
@@ -127,8 +135,10 @@ const handleStatusChange = (index, newStatus) => {
           />
         </div>
         <div>
-          <label>Priority:</label>
+          <label>Priority:</label><br />
           <select
+          className="w-100 p-2 my-1"
+            required
             value={newTask.priority}
             onChange={(e) =>
               setNewTask({ ...newTask, priority: e.target.value })
@@ -140,8 +150,10 @@ const handleStatusChange = (index, newStatus) => {
           </select>
         </div>
         <div>
-          <label>Assigned To:</label>
+          <label>Assigned To:</label><br />
           <select
+          className="w-100 p-2 my-1"
+            required
             value={newTask.assignedTo}
             onChange={(e) =>
               setNewTask({ ...newTask, assignedTo: e.target.value })
@@ -164,11 +176,11 @@ const handleStatusChange = (index, newStatus) => {
           />
         </div> */}
         <div>
-          <button onClick={addTask}>Add Task</button>
+          <button className="btn btn-primary my-2 w-100" onClick={addTask}>Add Task</button>
             </div>
             {/* Task List */}
             <TaskList handleStatusChange={handleStatusChange} setFilter={setFilter} setSortBy={setSortBy} sortedData={sortedData} />
-      </>
+      </div>
     );
 };
 
