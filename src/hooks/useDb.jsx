@@ -2,6 +2,7 @@
 const useDb = () => {
   const dbName = "CollaborativeTMA";
   const storeName = "user";
+
   let currentUser = null;
 
   // Open the IndexedDB database
@@ -15,7 +16,7 @@ const useDb = () => {
           keyPath: "id",
           autoIncrement: true,
         });
-        store.createIndex("users", "email", { unique: true });
+          store.createIndex("users", "email", { unique: true });
       };
 
       idb.onsuccess = (event) => {
@@ -107,16 +108,89 @@ const useDb = () => {
     currentUser = null;
   };
 
-  // Get the current user
-  const getCurrentUser = () => {
-    return currentUser;
+  // Get user data by email including their profile picture
+  const getUserDataByEmail = (email, callback) => {
+    openDB()
+      .then((db) => {
+        const tx = db.transaction(storeName, "readonly");
+        const store = tx.objectStore(storeName);
+        const emailIndex = store.index("users");
+        const emailRequest = emailIndex.get(email);
+
+        emailRequest.onsuccess = (event) => {
+          const user = event.target.result;
+
+          if (user) {
+            // Successful retrieval, trigger the callback with the user data
+            callback(user);
+          } else {
+            // User not found, trigger the callback with null
+            callback(null);
+          }
+        };
+
+        tx.onerror = () => {
+          callback(null);
+        };
+
+        tx.oncomplete = () => {
+          db.close();
+        };
+      })
+      .catch(() => {
+        callback(null);
+      });
   };
+
+  // Set the current user
+  const setCurrentUser = (user) => {
+    currentUser = user;
+  };
+
+  // all user email show
+
+  const getAllUserInfo = (callback) => {
+    openDB()
+      .then((db) => {
+        const tx = db.transaction(storeName, "readonly");
+        const store = tx.objectStore(storeName);
+        const emailIndex = store.index("users");
+        const emailRequest = emailIndex.openCursor();
+        const users = [];
+
+        emailRequest.onsuccess = (event) => {
+          const cursor = event.target.result;
+          if (cursor) {
+            // Collect user objects
+            users.push(cursor.value);
+            cursor.continue();
+          } else {
+            // No more users, trigger the callback with the collected user information
+            callback(users);
+          }
+        };
+
+        tx.onerror = () => {
+          callback([]);
+        };
+
+        tx.oncomplete = () => {
+          db.close();
+        };
+      })
+      .catch(() => {
+        callback([]);
+      });
+  };
+   
 
   return {
     signUp,
     login,
     logout,
-    getCurrentUser,
+    getUserDataByEmail,
+    setCurrentUser,
+    getAllUserInfo,
   };
 };
 

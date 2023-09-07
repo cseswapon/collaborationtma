@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useDb from "../../hooks/useDb";
 
 export default function Login() {
@@ -11,25 +11,39 @@ export default function Login() {
 
   const { email, password, error } = state;
 
+    const navigator = useNavigate();
+
   const auth = useDb();
+  // cookie set with a login
+  function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+      let date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
   // Define a callback function to handle the login result
   const handleLoginResult = (user) => {
     if (user) {
       console.log("Login successful. User data:", user);
-      // You can perform actions here after a successful login
+      setCookie("user_login", email, 2);
+        localStorage.setItem("user-info", JSON.stringify({ logIn: user, email:email }));
+        alert('Login Successful');
+        navigator('/')
     } else {
-      console.log("Login failed. Invalid credentials.");
-      // You can handle failed login attempts here
+      alert("Login failed. Invalid credentials.");
     }
   };
 
-  
   const handelSubmit = (e) => {
-      e.preventDefault()
-      auth.login(email, password, handleLoginResult);
+    e.preventDefault();
+    auth.login(email, password, handleLoginResult);
     //   console.log('form submit');
-    }
-    
+  };
+
   return (
     <>
       <h2>Login</h2>

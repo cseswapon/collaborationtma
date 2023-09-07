@@ -1,6 +1,6 @@
 // Register.js
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useDb from "../../hooks/useDb";
 
 export default function Register() {
@@ -14,27 +14,30 @@ export default function Register() {
   });
 
   const { email, password, username, bio, error } = state;
-  const auth = useDb();
+    const auth = useDb();
+    const navigate = useNavigate();
 
   const handleRegistration = (success, message) => {
     if (success) {
-      console.log("Register successful. Message:", message);
+        console.log("Register successful. Message:", message);
+        alert("Register successful. Message");
+        navigate('/login')
     } else {
-      console.error("Register failed. Message:", message);
+        console.error("Register failed. Message:", message);
+        alert("Register failed. Message");
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Use the selected image file directly for reading
     const profilePictureFile = state.profilePicture;
 
     if (profilePictureFile) {
       const fileReader = new FileReader();
 
       fileReader.onload = (event) => {
-        const profilePicture = event.target.result; // Use the result directly
+        const profilePicture = event.target.result; 
         auth.signUp(
           email,
           password,
