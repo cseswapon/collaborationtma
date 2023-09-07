@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useDb from "../../../hooks/useDb";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [data, setData] = useState({});
@@ -12,7 +13,7 @@ const Header = () => {
       let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
       document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.reload();
   }
 
@@ -44,6 +45,9 @@ const Header = () => {
 
   return (
     <>
+      <Link to="/">Home</Link>
+      <Link to="/createTeam">Create Team</Link>
+      <Link to="/taskTeam">Create Team Taxk</Link>
       <img src={data.profilePicture} width={40} alt="avatar" />
       <strong>{data?.email}</strong>
       <button onClick={logout}>LogOut</button>

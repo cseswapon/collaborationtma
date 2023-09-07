@@ -30,7 +30,7 @@ export default function Login() {
     if (user) {
       console.log("Login successful. User data:", user);
       setCookie("user_login", email, 2);
-        localStorage.setItem("user-info", JSON.stringify({ logIn: user, email:email }));
+        sessionStorage.setItem("user-info", JSON.stringify({ logIn: user, email:email }));
         alert('Login Successful');
         navigator('/')
     } else {

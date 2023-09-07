@@ -20,7 +20,7 @@ const TaskList = ({setFilter,setSortBy,sortedData,handleStatusChange}) => {
               <td>DueDate</td>
               <td>Priority</td>
               <td>Status</td>
-              <td>TeamId</td>
+              {/* <td>TeamId</td> */}
               <td>AssignedTo</td>
               <td>Action</td>
             </tr>
@@ -34,7 +34,7 @@ const TaskList = ({setFilter,setSortBy,sortedData,handleStatusChange}) => {
                 <td>{data.dueDate}</td>
                 <td>{data.priority}</td>
                 <td>{data.status}</td>
-                <td>{data.teamId}</td>
+                {/* <td>{data.teamId}</td> */}
                 <td>{data.assignedTo}</td>
                 <td>
                   <select

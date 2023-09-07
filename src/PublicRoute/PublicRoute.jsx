@@ -2,7 +2,7 @@ import { Navigate, useLocation } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const PublicRoute = ({ children }) => {
-  const userInfo = localStorage.getItem("user-info");
+  const userInfo = sessionStorage.getItem("user-info");
   const user = JSON.parse(userInfo);
   const location = useLocation();
   if (user) {

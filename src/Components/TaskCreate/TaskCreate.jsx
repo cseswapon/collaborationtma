@@ -34,7 +34,7 @@ const TaskCreate = () => {
     setStorData([...storData, taskData]);
 
     // Save the updated array to sessionStorage
-    sessionStorage.setItem("task", JSON?.stringify([...storData, taskData]));
+    localStorage.setItem("task", JSON?.stringify([...storData, taskData]));
 
     setNewTask({
       title: "",
@@ -53,7 +53,7 @@ const TaskCreate = () => {
   useEffect(() => {
     auth.getAllUserInfo((user) => setAllUser(user));
     return () => {
-      const sessionData = sessionStorage.getItem("task");
+      const sessionData = localStorage.getItem("task");
       if (sessionData) {
         setStorData(JSON?.parse(sessionData));
       }
@@ -91,7 +91,7 @@ const handleStatusChange = (index, newStatus) => {
   const updatedData = [...storData];
   updatedData[index].status = newStatus;
   setStorData(updatedData);
-  sessionStorage.setItem("task", JSON.stringify(updatedData));
+  localStorage.setItem("task", JSON.stringify(updatedData));
 };
     
     return (
@@ -154,7 +154,7 @@ const handleStatusChange = (index, newStatus) => {
             ))}
           </select>
         </div>
-        <div>
+        {/* <div>
           <label>Team Name</label>
           <input
             placeholder="teamId"
@@ -162,7 +162,7 @@ const handleStatusChange = (index, newStatus) => {
             value={newTask.teamId}
             onChange={(e) => setNewTask({ ...newTask, teamId: e.target.value })}
           />
-        </div>
+        </div> */}
         <div>
           <button onClick={addTask}>Add Task</button>
             </div>

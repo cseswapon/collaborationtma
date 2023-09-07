@@ -6,6 +6,8 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import TaskManager from "../Components/TaskManager/TaskManager";
 import PublicRoute from "../PublicRoute/PublicRoute";
 import Header from "../Components/Share/Header/Header";
+import CreateTeam from "../Components/CreateTeam/CreateTeam";
+import TeamWork from "../Components/TeamWork/TeamWork";
 
 export const route = createBrowserRouter([
   {
@@ -31,6 +33,22 @@ export const route = createBrowserRouter([
       <PublicRoute>
         <Register />
       </PublicRoute>
+    ),
+  },
+  {
+    path: "/createTeam",
+    element: (
+      <PrivateRoute>
+        <CreateTeam />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/taskTeam",
+    element: (
+      <PrivateRoute>
+        <TeamWork />
+      </PrivateRoute>
     ),
   },
   {
