@@ -62,7 +62,7 @@ const TaskCreate = () => {
   }, []);
 
   const [filter, setFilter] = useState("all");
-  const [sortBy, setSortBy] = useState("dueDate");
+  const [sortBy, setSortBy] = useState("");
 
   const filteredData = storData.filter((task) => {
     if (filter === "all") {
@@ -79,7 +79,7 @@ const TaskCreate = () => {
 
   const sortedData = [...filteredData].sort((taskA, taskB) => {
     if (sortBy === "dueDate") {
-      // return new Date(taskA.dueDate) - new Date(taskB.dueDate);
+      return new Date(taskA.dueDate) - new Date(taskB.dueDate);
       // console.log('alert');
     } else if (sortBy === "priority") {
       const priorityOrder = { Low: 0, Medium: 1, High: 2 };

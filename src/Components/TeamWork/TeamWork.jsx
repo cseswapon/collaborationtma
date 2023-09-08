@@ -31,12 +31,11 @@ const TeamWork = () => {
   };
 
   useEffect(() => {
-
-    const teamStor = () => { 
+    const teamStor = () => {
       const teamData = localStorage.getItem("team");
       const teamDataTask = JSON.parse(teamData) || [];
-      setTeam(teamDataTask)
-    }
+      setTeam(teamDataTask);
+    };
 
     const dataStore = () => {
       const teamTaskData = localStorage.getItem("team-task");
@@ -44,7 +43,7 @@ const TeamWork = () => {
       setNewTeam(parsedTeamTask);
     };
     dataStore();
-    teamStor()
+    teamStor();
   }, []);
 
   const handleStatusChange = (index, newStatus) => {
@@ -80,6 +79,7 @@ const TeamWork = () => {
             <label>Title:</label>
             <br />
             <input
+              required
               className="w-100 my-2 py-2 px-2"
               placeholder="title"
               type="text"
@@ -93,6 +93,7 @@ const TeamWork = () => {
             <label>Description:</label>
             <br />
             <textarea
+              required
               className="w-100 my-2 py-2 px-2"
               placeholder="description"
               value={newTask.description}
@@ -105,6 +106,7 @@ const TeamWork = () => {
             <label>Due Date:</label>
             <br />
             <input
+              required
               className="w-100 my-2 py-2 px-2"
               type="date"
               value={newTask.dueDate}
@@ -117,6 +119,7 @@ const TeamWork = () => {
             <label>Priority:</label>
             <br />
             <select
+              required
               className="w-100 my-2 py-2 px-2"
               value={newTask.priority}
               onChange={(e) =>
@@ -132,6 +135,7 @@ const TeamWork = () => {
             <label>Team Name</label>
             <br />
             <select
+              required
               className="w-100 my-2 py-2 px-2"
               value={newTask.teamName}
               onChange={(e) =>
@@ -185,7 +189,7 @@ const TeamWork = () => {
               {/* eslint-disable-next-line react/prop-types */}
               {newTeam.map((data, i) => (
                 <tr key={i}>
-                  <td>{i+1}</td>
+                  <td>{i + 1}</td>
                   <td>{data.title}</td>
                   <td>{data.description}</td>
                   <td>{data.dueDate}</td>
