@@ -64,7 +64,7 @@ const Header = () => {
           height={70}
           alt="avatar"
         />
-        <strong className="mx-2">{data?.email}</strong>
+        <strong className="mx-2">{data?.username}</strong>
         <button className="mx-2 btn btn-danger" onClick={logout}>
           LogOut
         </button>

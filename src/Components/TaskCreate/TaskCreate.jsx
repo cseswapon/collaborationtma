@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import useDb from "../../hooks/useDb";
 import TaskList from "./TaskList";
 
-
 const TaskCreate = () => {
-    const [newTask, setNewTask] = useState({
+  const [newTask, setNewTask] = useState({
     title: "",
     description: "",
     dueDate: "",
@@ -36,7 +35,7 @@ const TaskCreate = () => {
     // Save the updated array to sessionStorage
     localStorage.setItem("task", JSON?.stringify([...storData, taskData]));
 
-    alert('Task Added')
+    alert("Task Added");
 
     setNewTask({
       title: "",
@@ -62,7 +61,7 @@ const TaskCreate = () => {
     };
   }, []);
 
-  const [filter, setFilter] = useState("all"); 
+  const [filter, setFilter] = useState("all");
   const [sortBy, setSortBy] = useState("dueDate");
 
   const filteredData = storData.filter((task) => {
@@ -80,7 +79,8 @@ const TaskCreate = () => {
 
   const sortedData = [...filteredData].sort((taskA, taskB) => {
     if (sortBy === "dueDate") {
-      return new Date(taskA.dueDate) - new Date(taskB.dueDate);
+      // return new Date(taskA.dueDate) - new Date(taskB.dueDate);
+      // console.log('alert');
     } else if (sortBy === "priority") {
       const priorityOrder = { Low: 0, Medium: 1, High: 2 };
       return priorityOrder[taskA.priority] - priorityOrder[taskB.priority];
@@ -88,85 +88,78 @@ const TaskCreate = () => {
     return 0; // Default to no sorting
   });
 
-
-const handleStatusChange = (index, newStatus) => {
-  const updatedData = [...storData];
-  updatedData[index].status = newStatus;
-  setStorData(updatedData);
-  localStorage.setItem("task", JSON.stringify(updatedData));
-};
-    
-    return (
-      <div className="container">
-        <h2>Task Manager</h2>
-        <div>
-          <label>Title:</label><br />
-          <input
+  return (
+    <div className="container">
+      <h2>Task Manager</h2>
+      <div>
+        <label>Title:</label>
+        <br />
+        <input
           className="w-100 p-2 my-1"
-            required
-            placeholder="title"
-            type="text"
-            value={newTask.title}
-            onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-          />
-        </div>
-        <div>
-          <label>Description:</label><br />
-          <textarea
+          required
+          placeholder="title"
+          type="text"
+          value={newTask.title}
+          onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+        />
+      </div>
+      <div>
+        <label>Description:</label>
+        <br />
+        <textarea
           className="w-100 p-2 my-1"
-            required
-            placeholder="description"
-            value={newTask.description}
-            onChange={(e) =>
-              setNewTask({ ...newTask, description: e.target.value })
-            }
-          />
-        </div>
-        <div>
-          <label>Due Date:</label><br />
-          <input
+          required
+          placeholder="description"
+          value={newTask.description}
+          onChange={(e) =>
+            setNewTask({ ...newTask, description: e.target.value })
+          }
+        />
+      </div>
+      <div>
+        <label>Due Date:</label>
+        <br />
+        <input
           className="w-100 p-2 my-1"
-            required
-            type="date"
-            value={newTask.dueDate}
-            onChange={(e) =>
-              setNewTask({ ...newTask, dueDate: e.target.value })
-            }
-          />
-        </div>
-        <div>
-          <label>Priority:</label><br />
-          <select
+          required
+          type="date"
+          value={newTask.dueDate}
+          onChange={(e) => setNewTask({ ...newTask, dueDate: e.target.value })}
+        />
+      </div>
+      <div>
+        <label>Priority:</label>
+        <br />
+        <select
           className="w-100 p-2 my-1"
-            required
-            value={newTask.priority}
-            onChange={(e) =>
-              setNewTask({ ...newTask, priority: e.target.value })
-            }
-          >
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-          </select>
-        </div>
-        <div>
-          <label>Assigned To:</label><br />
-          <select
+          required
+          value={newTask.priority}
+          onChange={(e) => setNewTask({ ...newTask, priority: e.target.value })}
+        >
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+      </div>
+      <div>
+        <label>Assigned To:</label>
+        <br />
+        <select
           className="w-100 p-2 my-1"
-            required
-            value={newTask.assignedTo}
-            onChange={(e) =>
-              setNewTask({ ...newTask, assignedTo: e.target.value })
-            }
-          >
-            {allUser.map(({ email }, i) => (
-              <option key={i} value={email}>
-                {email}
-              </option>
-            ))}
-          </select>
-        </div>
-        {/* <div>
+          required
+          value={newTask.assignedTo}
+          onChange={(e) =>
+            setNewTask({ ...newTask, assignedTo: e.target.value })
+          }
+        >
+          {allUser.map(({ email }, i) => (
+            <option key={i} value={email}>
+              {email}
+            </option>
+          ))}
+        </select>
+      </div>
+      {/* <div>
           <label>Team Name</label>
           <input
             placeholder="teamId"
@@ -175,13 +168,21 @@ const handleStatusChange = (index, newStatus) => {
             onChange={(e) => setNewTask({ ...newTask, teamId: e.target.value })}
           />
         </div> */}
-        <div>
-          <button className="btn btn-primary my-2 w-100" onClick={addTask}>Add Task</button>
-            </div>
-            {/* Task List */}
-            <TaskList handleStatusChange={handleStatusChange} setFilter={setFilter} setSortBy={setSortBy} sortedData={sortedData} />
+      <div>
+        <button className="btn btn-primary my-2 w-100" onClick={addTask}>
+          Add Task
+        </button>
       </div>
-    );
+      {/* Task List */}
+      <TaskList
+        setFilter={setFilter}
+        setSortBy={setSortBy}
+        sortedData={sortedData}
+        setStorData={setStorData}
+        storData={storData}
+      />
+    </div>
+  );
 };
 
 export default TaskCreate;

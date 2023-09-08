@@ -1,6 +1,14 @@
 
 // eslint-disable-next-line react/prop-types
-const TaskList = ({setFilter,setSortBy,sortedData,handleStatusChange}) => {
+const TaskList = ({ setFilter, setSortBy, sortedData, storData,setStorData}) => {
+
+  const handleStatusChange = (index, newStatus) => {
+    const updatedData = [...storData];
+    updatedData[index] = { ...updatedData[index], status: newStatus };
+    setStorData(updatedData);
+    localStorage.setItem("task", JSON.stringify(updatedData));
+  };
+
     return (
       <div className="my-5">
         <h1>Task List</h1>
