@@ -171,6 +171,7 @@ const TeamWork = () => {
           <table className="table text-center my-3">
             <thead>
               <tr className="fw-bold">
+                <td>Id</td>
                 <td>Title</td>
                 <td>Description</td>
                 <td>DueDate</td>
@@ -184,6 +185,7 @@ const TeamWork = () => {
               {/* eslint-disable-next-line react/prop-types */}
               {newTeam.map((data, i) => (
                 <tr key={i}>
+                  <td>{i+1}</td>
                   <td>{data.title}</td>
                   <td>{data.description}</td>
                   <td>{data.dueDate}</td>

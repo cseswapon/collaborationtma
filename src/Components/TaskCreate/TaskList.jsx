@@ -56,6 +56,7 @@ const TaskList = ({ setFilter, setSortBy, sortedData, storData,setStorData}) => 
           <table className="my-4 table text-center">
             <thead>
               <tr className="fw-bold">
+                <td>ID</td>
                 <td>Title</td>
                 <td>Description</td>
                 <td>DueDate</td>
@@ -70,6 +71,7 @@ const TaskList = ({ setFilter, setSortBy, sortedData, storData,setStorData}) => 
               {/* eslint-disable-next-line react/prop-types */}
               {sortedData.map((data, i) => (
                 <tr className="py-2" key={i}>
+                  <td>{i+1}</td>
                   <td>{data.title}</td>
                   <td>{data.description}</td>
                   <td>{data.dueDate}</td>
