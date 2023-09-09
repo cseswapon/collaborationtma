@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "../Share/Header/Header";
+import TeamWorkList from "./TeamWorkList";
 
 const TeamWork = () => {
   const [team, setTeam] = useState([]);
@@ -10,10 +11,10 @@ const TeamWork = () => {
     dueDate: "",
     priority: "Low",
     status: "In Progress",
-    teamName: "",
+    teamName: team[0],
   });
 
-  console.log(team);
+  // console.log(team, newTask);
 
   const handelSubmit = (e) => {
     e.preventDefault();
@@ -67,7 +68,7 @@ const TeamWork = () => {
     }
   };
 
-  console.log(team);
+  // console.log(team);
 
   return (
     <>
@@ -142,6 +143,7 @@ const TeamWork = () => {
                 setNewTask({ ...newTask, teamName: e.target.value })
               }
             >
+              <option value="">select your team</option>
               {team?.map((name, i) => (
                 <option key={i} value={name}>
                   {name}
@@ -153,66 +155,13 @@ const TeamWork = () => {
             Create Task
           </button>
         </form>
-        <div className="my-3">
-          <h1>Team Work List</h1>
-          <p className="my-3 fw-bold">Team Member Task Filtering</p>
-          {/* <button
-            className="btn btn-outline-primary me-3 "
-            onClick={() => setNewTask(newTask)}
-          >
-            all
-          </button> */}
-          {team.map((item, i) => (
-            <button
-              className="btn btn-outline-primary me-3 "
-              onClick={() => teamFilter(item)}
-              key={i}
-            >
-              {item}
-            </button>
-          ))}
-          <br />
-          <table className="table text-center my-3">
-            <thead>
-              <tr className="fw-bold">
-                <td>Id</td>
-                <td>Title</td>
-                <td>Description</td>
-                <td>DueDate</td>
-                <td>Priority</td>
-                <td>Status</td>
-                <td>Team Name</td>
-                <td>Action</td>
-              </tr>
-            </thead>
-            <tbody>
-              {/* eslint-disable-next-line react/prop-types */}
-              {newTeam.map((data, i) => (
-                <tr key={i}>
-                  <td>{i + 1}</td>
-                  <td>{data.title}</td>
-                  <td>{data.description}</td>
-                  <td>{data.dueDate}</td>
-                  <td>{data.priority}</td>
-                  <td>{data.status}</td>
-                  <td>{data.teamName}</td>
-                  <td>
-                    <select
-                      className="form-select"
-                      aria-label="Default select example"
-                      value={data.status}
-                      onChange={(e) => handleStatusChange(i, e.target.value)}
-                    >
-                      <option value="In Progress">In Progress</option>
-                      <option value="Completed">Completed</option>
-                      <option value="Pending">Pending</option>
-                    </select>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+          <TeamWorkList
+            handleStatusChange={handleStatusChange}
+            newTeam={newTeam}
+            team={team}
+            teamFilter={teamFilter}
+          />
+        
       </div>
     </>
   );

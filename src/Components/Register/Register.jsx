@@ -19,7 +19,7 @@ export default function Register() {
 
   const handleRegistration = (success, message) => {
     if (success) {
-        console.log("Register successful. Message:", message);
+        // console.log("Register successful. Message:", message);
         alert("Register successful. Message");
         navigate('/login')
     } else {
