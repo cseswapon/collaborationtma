@@ -19,6 +19,9 @@ const TaskCreate = () => {
 
   const addTask = () => {
     if (newTask.title.trim() === "") return;
+    if (!newTask.dueDate) {
+      return alert("Please Select Your Date");
+    }
     const taskData = {
       title: newTask.title,
       description: newTask.description,
@@ -53,12 +56,10 @@ const TaskCreate = () => {
   const auth = useDb();
   useEffect(() => {
     auth.getAllUserInfo((user) => setAllUser(user));
-    return () => {
-      const sessionData = localStorage.getItem("task");
-      if (sessionData) {
-        setStorData(JSON?.parse(sessionData));
-      }
-    };
+    const sessionData = localStorage.getItem("task");
+    if (sessionData) {
+      setStorData(JSON?.parse(sessionData));
+    }
   }, []);
 
   const [filter, setFilter] = useState("all");
@@ -87,7 +88,7 @@ const TaskCreate = () => {
     }
     return 0; // Default to no sorting
   });
-
+// console.log(sortedData.length)
   return (
     <div className="container">
       <h2>Task Manager</h2>
@@ -120,8 +121,8 @@ const TaskCreate = () => {
         <label>Due Date:</label>
         <br />
         <input
-          className="w-100 p-2 my-1"
           required
+          className="w-100 p-2 my-1"
           type="date"
           value={newTask.dueDate}
           onChange={(e) => setNewTask({ ...newTask, dueDate: e.target.value })}
@@ -159,28 +160,21 @@ const TaskCreate = () => {
           ))}
         </select>
       </div>
-      {/* <div>
-          <label>Team Name</label>
-          <input
-            placeholder="teamId"
-            type="text"
-            value={newTask.teamId}
-            onChange={(e) => setNewTask({ ...newTask, teamId: e.target.value })}
-          />
-        </div> */}
       <div>
         <button className="btn btn-primary my-2 w-100" onClick={addTask}>
           Add Task
         </button>
       </div>
       {/* Task List */}
-      <TaskList
-        setFilter={setFilter}
-        setSortBy={setSortBy}
-        sortedData={sortedData}
-        setStorData={setStorData}
-        storData={storData}
-      />
+      { (
+        <TaskList
+          setFilter={setFilter}
+          setSortBy={setSortBy}
+          sortedData={sortedData}
+          setStorData={setStorData}
+          storData={storData}
+        />
+      )}
     </div>
   );
 };

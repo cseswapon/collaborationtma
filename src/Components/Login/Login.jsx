@@ -25,7 +25,7 @@ export default function Login() {
   }
   const handleLoginResult = (user) => {
     if (user) {
-      console.log("Login successful. User data:", user);
+      // console.log("Login successful. User data:", user);
       setCookie("user_login", email, 2);
         sessionStorage.setItem("user-info", JSON.stringify({ logIn: user, email:email }));
         alert('Login Successful');
